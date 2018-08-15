@@ -1,9 +1,8 @@
 def MinMax (SA):
-    height, width = SA.shape
     X=0
     O=0
-    for col in range(width):
-        for row in range(height):
+    for col in range(3):
+        for row in range(3):
             if SA[col][row] == 1:
                 X = X+1
             if SA[col][row] == 2:
