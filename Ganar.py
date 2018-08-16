@@ -1,5 +1,6 @@
-def ganar(SA):
-    Empate=posMov(SA)
+def ganar(EA):
+    from PosMov import posMov
+    Empate=posMov(EA)
     for i in range(3):
         if EA[i][0] == 1 and EA[i][1] == 1 and EA[i][2] == 1:
             print('You are the champion')
@@ -33,11 +34,11 @@ def ganar(SA):
             print('You are not the champion')   
             n=-1
             break
-    if Empate==0:
-        print('There is not the champion') 
-        n=0
-    else:
-        print('You can play')
-        n=2
+        if Empate==0:
+            print('There is no champion')
+            n=0
+        else:
+            print('You can play')
+            n=2
     
     return n

@@ -18,6 +18,17 @@ def newState(minMax, actState, iRoute):
         
 #    print(actState)
     return(actState)
+
+
+def finState(minMax, actState):
+    [a, b] = py.where(actState == 0)
+    if minMax == True:
+        actState[a, b] = 1
+    elif minMax == False:
+        actState[a, b] = 2
+
+    #    print(actState)
+    return (actState)
         
 #newState(True,py.array([(2,0,0), (0,1,1), (2,2,0)]),4)
 
