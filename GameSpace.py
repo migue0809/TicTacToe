@@ -1,5 +1,5 @@
 from math import factorial
-def GameSpace (SA):
+def gameSpace (SA):
     k = PosMov(SA)
     Suma = 0 
     for i in range(k):

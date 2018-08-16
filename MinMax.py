@@ -1,4 +1,4 @@
-def MinMax (SA):
+def minMax (SA):
     X=0
     O=0
     for col in range(3):

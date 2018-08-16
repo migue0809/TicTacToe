@@ -1,5 +1,4 @@
-import numpy as np
-def PosMov (SA):
+def posMov (SA):
     HP=0
     for col in range(3):
         for row in range(3):

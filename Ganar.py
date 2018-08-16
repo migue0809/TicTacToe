@@ -1,4 +1,4 @@
-def Ganar(SA):
+def ganar(SA):
     n=0
     for i in range(3):
         if EA[i][0] == 1 and EA[i][1] == 1 and EA[i][2] == 1:
