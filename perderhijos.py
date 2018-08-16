@@ -33,7 +33,7 @@ def perderhijos(IS,heuristic, deep, AS, vecLocation,alpha,beta):
                     vecLocation[deep:, 0] = np.ones(vecLocation[deep:, 0].shape)
             else:  # si faltan hermanos
                 vecLocation[deep, 0] = vecLocation[deep, 0] + 1
-    return vecLocation, i, alpha, beta
+    return vecLocation, alpha, beta
 
 
 
