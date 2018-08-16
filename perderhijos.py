@@ -7,8 +7,11 @@ def perderhijos(IS,heuristic, deep, AS, vecLocation,alpha,beta):
         if heuristic > alpha:
             beta = heuristic
         if alpha >= beta:
-            vecLocation[deep - 1, 0] = vecLocation[deep - 1, 0] + 1
-            vecLocation[deep:, 0] = np.ones(vecLocation[deep:, 0].shape)  # Reemplazando el vector loc
+            if vecLocation[deep - 2, 0] < vecChildren[deep - 2, 0]:
+                vecLocation[deep - 2, 0] = vecLocation[deep - 2, 0] + 1
+                vecLocation[(deep-1):, 0] = np.ones(vecLocation[(deep-1):, 0].shape)  # Reemplazando el vector loc
+            else:
+                vecLocation[(deep - 2):, 0] =  np.zeros(vecLocation[(deep-2):, 0].shape)
         else:
             if vecLocation[deep,0] == vecChildren[deep,0]: # Si se chequearon todos los hermanos
                 if vecLocation[deep-1,0] == vecChildren[deep-1,0]:
@@ -22,8 +25,12 @@ def perderhijos(IS,heuristic, deep, AS, vecLocation,alpha,beta):
         if heuristic > beta:
             alpha = heuristic
         if alpha >= beta:
-            vecLocation[deep - 1, 0] = vecLocation[deep - 1, 0] + 1
-            vecLocation[deep:, 0] = np.ones(vecLocation[deep:, 0].shape)  # Reemplazando el vector loc
+            if vecLocation[deep-2,0] < vecChildren[deep-2,0]:
+                vecLocation[deep - 2, 0] = vecLocation[deep - 2, 0] + 1
+                vecLocation[(deep-1):, 0] = np.ones(vecLocation[(deep-1):, 0].shape)  # Reemplazando el vector loc
+            else:
+                vecLocation[(deep - 2):, 0] = np.zeros(vecLocation[(deep - 2):, 0].shape)
+
         else:
             if vecLocation[deep, 0] == vecChildren[deep, 0]:  # Si se chequearon todos los hermanos
                 if vecLocation[deep - 1, 0] == vecChildren[deep-1, 0]:

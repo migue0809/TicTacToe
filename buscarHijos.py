@@ -12,14 +12,14 @@ from perderhijos import perderhijos
 from PosMov import posMov
 from MinMax import minMax
 from compRuta import compRuta
+from inArray import inArray
 alpha = -10e4
 beta = 10e4
-actState = py.array([(1,2,1), (0,1,0), (0,2,2)])
+actState = inArray()
 route = py.ones((posMov(actState),1),dtype=int)
 minMax = minMax(actState)
 posMov1 = posMov(actState)
 VM = py.zeros((posMov1, 3, 3))
-print(VM[1])
 VH = py.zeros((posMov1, 1))
 """Esta es una funcion compuesta que articula a la funcion perderHijo() y a 
 la funcion compRuta haciendo uso de la funcion actState().
@@ -36,33 +36,39 @@ while True:
     for i in range(posMov1-1):
         if route[i+1,0] != 0:
             a = route[i+1,0]
-            if minMax == 0:
-                actState = newState(minMax, actState, a)
+            minMax1 = not (minMax)
+            if minMax == False:
+                actState = newState(minMax1, actState, a)
                 if i == 0:
                     headState = actState.copy()
-            elif minMax == 1:
-                actState = newState(minMax, actState, a)
+            elif minMax == True:
+                actState = newState(minMax1, actState, a)
                 if i == 0:
                     headState = actState.copy()
+        else:
+            [route, alpha, beta] = perderhijos(inState, b, i, actState, route, alpha, beta)
+            break
         minMax = not(minMax)
         b = ganar(actState)
-        if b != 2:
-            [route, alpha, beta] = perderhijos(inState, b, i+1, actState, route, alpha, beta)
+        if b != 2 and route[0,0]==1:
             [VM, VH] = compRuta(headState, b, route, VM, VH, False)
+            print(i+1)
+            [route, alpha, beta] = perderhijos(inState, b, i+1, actState, route, alpha, beta)
             sw = 0
             break
-    if sw != 0:
+    if sw != 0 and route[0,0]==1:
         preState = actState.copy()
         a = route[-1, 0]
         actState = finState(minMax,actState)
         b = ganar(actState)
-        [route, alpha, beta] = perderhijos(inState, b, posMov1-1, preState, route, alpha, beta)
         [VM, VH] = compRuta(headState, b, route, VM, VH, False)
+        [route, alpha, beta] = perderhijos(inState, b, posMov1-1, preState, route, alpha, beta)
+
 
     print('Vector localización = ', route.T, '\nEstado Actual =\n', actState, '\nHeuristica', b, '\nAlpha = ', alpha,
-          '\nBeta =', beta)
+           '\nBeta =', beta)
     print(
-        '----------------------------------------------------------------------------------------------------------------')
+         '----------------------------------------------------------------------------------------------------------------')
     if route[0,0] > 1:
         [M,H] = compRuta(headState, b, route, VM, VH, True)
         print('HEURISTICA = ', H, '\nLA JUGADA DEBE SER = \n', M)
