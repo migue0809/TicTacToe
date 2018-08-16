@@ -1,11 +1,14 @@
-def compRuta(VR,Heuristica,SA):
-    TamañoH=len(Heuristica)
-    Move=PosMov(SA)
-    Heuristica1=-1000
-    for i in range(TamañoH):
-        if Heuristica[i]>Heuristica1:
-            Heuristica1=Heuristica[i]+Heuristica1
-    CR=VR
-            
-    
-    return Heuristica1,CR
+
+
+def compRuta(CR,Heuristica,Ruta,VM,VH,T):
+
+    import numpy as np
+    if (T==True):
+        MejorH=np.max(VH)
+        [X,Y]=np.where(VH == MejorH)
+        return VM[X][Y], MejorH
+    else:
+        a = Ruta[1, 0]
+        VM[a - 1] = CR
+        VH[a - 1] = Heuristica + VH[a - 1]
+        return VM, VH
