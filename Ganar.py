@@ -1,5 +1,5 @@
 def ganar(SA):
-    Empate=PosMov(SA)
+    Empate=posMov(SA)
     for i in range(3):
         if EA[i][0] == 1 and EA[i][1] == 1 and EA[i][2] == 1:
             print('You are the champion')

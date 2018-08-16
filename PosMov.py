@@ -1,3 +1,4 @@
+import numpy as np
 def posMov (SA):
     HP=0
     for col in range(3):
