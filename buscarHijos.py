@@ -38,13 +38,12 @@ while True:
             a = route[i+1,0]
             if minMax == 0:
                 actState = newState(minMax, actState, a)
-                if i == 0:
-                    headState = actState.copy()
             elif minMax == 1:
                 actState = newState(minMax, actState, a)
-                if i == 0:
-                    headState = actState.copy()
+            if i == 0:
+                headState = actState.copy()
         else:
+            b = ganar(actState)
             [route, alpha, beta] = perderhijos(inState, b, i, actState, route, alpha, beta)
             break
         minMax = not(minMax)
