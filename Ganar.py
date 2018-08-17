@@ -39,6 +39,6 @@ def ganar(EA):
             n=0
         else:
             #print('You can play')
-            n=2
+            n=-1000
     
     return n

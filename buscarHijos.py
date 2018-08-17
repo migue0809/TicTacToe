@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+1# -*- coding: utf-8 -*-
 """
 Created on Wed Aug 15 08:55:10 2018
 
@@ -17,7 +17,7 @@ alpha = -10e4
 beta = 10e4
 actState = inArray()
 route = py.ones((posMov(actState),1),dtype=int)
-minMax = minMax(actState)
+minMax1 = minMax(actState)
 posMov1 = posMov(actState)
 VM = py.zeros((posMov1, 3, 3))
 VH = py.zeros((posMov1, 1))
@@ -34,22 +34,15 @@ while True:
     sw = 1
     actState = inState.copy()
     for i in range(posMov1-1):
+        minMax1 = minMax(actState)
         if route[i+1,0] != 0:
             a = route[i+1,0]
-            #minMax1 = not (minMax)
-            #if minMax == False:
-            actState = newState(minMax, actState, a)
-            if i == 0:
-                headState = actState.copy()
-                print(headState)
-            #elif minMax == True:
-                #actState = newState(minMax, actState, a)
-                #if i == 0:
-                    #headState = actState.copy()
+            actState = newState(minMax1, actState, a)
+        if i == 0:
+            headState = actState.copy()
         else:
             [route, alpha, beta] = perderhijos(inState, b, i, actState, route, alpha, beta)
             break
-        minMax = not(minMax)
         b = ganar(actState)
         if b != 2 and route[0,0]==1:
             [VM, VH] = compRuta(headState, b, route, VM, VH, False)
@@ -60,7 +53,7 @@ while True:
     if sw != 0 and route[0,0]==1:
         preState = actState.copy()
         a = route[-1, 0]
-        actState = finState(minMax,actState)
+        actState = finState(minMax1,actState)
         b = ganar(actState)
         [VM, VH] = compRuta(headState, b, route, VM, VH, False)
         [route, alpha, beta] = perderhijos(inState, b, posMov1-1, preState, route, alpha, beta)
